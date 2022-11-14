@@ -13,6 +13,7 @@
   "author": "nhub1910120",
   "license": "ISC",
   "dependencies": {
+    "argon2": "^0.30.2",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
