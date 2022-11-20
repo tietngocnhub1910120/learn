@@ -3,11 +3,9 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 class UserController {
   async getUser(req, res) {
-    const username = req.username;
+    const userId = req.userId;
     try {
-      const user = await User.findOne({ username: username }).select(
-        "-password"
-      );
+      const user = await User.findOne({ _id: userId }).select("-password");
       res.status(200).json({
         message: "lay thong tin thanh cong",
         user,
@@ -32,6 +30,7 @@ class UserController {
     try {
       //khong ton tai user
       const user = await User.findOne({ username: username });
+
       if (!user) {
         return res.status(402).json({
           message: "user khong ton tai",
@@ -47,7 +46,7 @@ class UserController {
         });
       }
       // truong hoop hop le
-      const token = jwt.sign(user.username, "ufhdfhfhdgghcvh");
+      const token = jwt.sign(user._id.toString(), "ufhdfhfhdgghcvh");
 
       res.status(201).json({
         message: "dang nhap thanh cong",
@@ -55,6 +54,7 @@ class UserController {
         token,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: "server khong phan hoi",
         success: false,
@@ -97,7 +97,7 @@ class UserController {
 
       await newUser.save();
 
-      const token = jwt.sign(newUser.username, "ufhdfhfhdgghcvh");
+      const token = jwt.sign(newUser._id.toString(), "ufhdfhfhdgghcvh");
 
       res.status(201).json({
         message: "dang ky tai khoan thanh cong",

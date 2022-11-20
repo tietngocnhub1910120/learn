@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     });
   }
 
-  const username = jwt.decode(token, "ufhdfhfhdgghcvh");
-  req.username = username;
+  const userId = jwt.decode(token, "ufhdfhfhdgghcvh");
+  req.userId = userId;
   next();
 };
