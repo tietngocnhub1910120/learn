@@ -1,16 +1,36 @@
 import api from "./api";
-
+import authHeader from "../utils/authHeader";
 class APIUser {
   constructor() {
     this.http = api("/api/user");
   }
-  register(payload) {
-    const response = this.http.post("/register", payload);
+  async register(payload) {
+    try {
+      const response = await this.http.post("/register", payload);
 
-    return response;
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
   }
-  login() {}
-  getUser() {}
+  async login(payload) {
+    try {
+      const response = await this.http.post("/login", payload);
+
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+  async getUser() {
+    try {
+      const response = await this.http.post("/", { headers: authHeader() });
+
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
 }
 
 export default new APIUser();

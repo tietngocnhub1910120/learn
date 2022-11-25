@@ -16,8 +16,13 @@
       >
         Register Account
       </div>
-      <div class="mt-10">
-        <form action="#">
+      <Form
+        class="mt-10"
+        as=""
+        v-slot="{ handleSubmit }"
+        :validation-schema="schema"
+      >
+        <form @submit.prevent="handleSubmit(event, handleRegiter)">
           <div class="flex flex-col mb-6">
             <label
               for="email"
@@ -43,13 +48,14 @@
                 </svg>
               </div>
 
-              <input
-                id="name"
+              <Field
+                id="username"
                 type="text"
-                name="name"
+                name="username"
                 class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                 placeholder="Enter Username"
               />
+              <ErrorMessage name="username" class="text-rose-400" />
             </div>
           </div>
           <div class="flex flex-col mb-6">
@@ -79,13 +85,14 @@
                 </span>
               </div>
 
-              <input
+              <Field
                 id="password"
                 type="password"
                 name="password"
                 class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                 placeholder="Password"
               />
+              <ErrorMessage name="password" class="text-rose-400" />
             </div>
           </div>
           <div class="flex flex-col mb-6">
@@ -115,13 +122,14 @@
                 </span>
               </div>
 
-              <input
-                id="repeatPassword"
+              <Field
+                id="comfirmPassword"
                 type="password"
-                name="repeatPassword"
+                name="comfirmPassword"
                 class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-                placeholder="Repeat Password"
+                placeholder="comfirm Password"
               />
+              <ErrorMessage name="comfirmPassword" class="text-rose-400" />
             </div>
           </div>
           <div class="flex w-full">
@@ -148,7 +156,7 @@
             </button>
           </div>
         </form>
-      </div>
+      </Form>
       <div class="flex justify-center items-center mt-6">
         <RouterLink
           to="/login"
@@ -177,9 +185,29 @@
 </template>
 
 <script>
+import * as yup from "yup";
+import { Field, Form, ErrorMessage } from "vee-validate";
 export default {
-  setup() {
-    return {};
+  components: { Field, Form, ErrorMessage },
+  data() {
+    const schema = yup.object().shape({
+      username: yup.string().required(),
+      password: yup.string().required(),
+      comfirmPassword: yup
+        .string()
+        .required()
+        .oneOf([yup.ref("password")], "Password do not match"),
+    });
+
+    return {
+      schema,
+    };
+  },
+  methods: {
+    async handleRegiter(values) {
+      const data = await this.$store.dispatch("register", values);
+      console.log(data);
+    },
   },
 };
 </script>
