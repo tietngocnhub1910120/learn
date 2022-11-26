@@ -209,6 +209,11 @@ export default {
       console.log(data);
     },
   },
+  created() {
+    if (this.$store.state.user.isLogged) {
+      this.$router.push("/home");
+    }
+  },
 };
 </script>
 

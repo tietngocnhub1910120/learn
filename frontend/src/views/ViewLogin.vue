@@ -164,9 +164,16 @@ export default {
   },
   methods: {
     async handleLogin(values) {
-      await this.$store.dispatch("login", values);
-      this.$router.push("/home");
+      const success = await this.$store.dispatch("login", values);
+      if (success) {
+        this.$router.push("/home");
+      }
     },
+  },
+  created() {
+    if (this.$store.state.user.isLogged) {
+      this.$router.push("/home");
+    }
   },
 };
 </script>

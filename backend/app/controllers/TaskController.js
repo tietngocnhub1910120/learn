@@ -50,8 +50,22 @@ class TaskController {
       });
     }
   }
-  getTask(req, res) {
-    res.send("lay tat ca bai viet");
+  async getTask(req, res) {
+    const userId = req.userId;
+    const id = req.params.id;
+    try {
+      const task = await Task.findOne({ poster: userId, _id: id });
+      res.status(201).json({
+        message: "Lay task thanh cong",
+        task,
+        success: true,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Server khong phan hoi",
+        success: false,
+      });
+    }
   }
   async editTask(req, res) {
     const userId = req.userId;

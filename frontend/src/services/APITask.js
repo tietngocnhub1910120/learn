@@ -37,7 +37,17 @@ class APITask {
   }
   async getTasks() {
     try {
-      const response = await this.http.post("/", {
+      const response = await this.http.get("/", {
+        headers: authHeader(),
+      });
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+  async getTask(id) {
+    try {
+      const response = await this.http.get(`/${id}`, {
         headers: authHeader(),
       });
       return response.data;

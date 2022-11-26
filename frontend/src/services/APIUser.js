@@ -25,7 +25,6 @@ class APIUser {
   async getUser() {
     try {
       const response = await this.http.get("/", { headers: authHeader() });
-
       return response.data;
     } catch (error) {
       return error.response.data;

@@ -3,10 +3,14 @@ import APITask from "../services/APITask";
 const taskStore = {
   state: () => ({
     tasks: [],
+    task: {},
   }),
   mutations: {
     GETALL(state, tasks) {
       state.tasks = tasks;
+    },
+    GETONE(state, task) {
+      state.task = task;
     },
   },
   actions: {
@@ -14,6 +18,14 @@ const taskStore = {
       const response = await APITask.getTasks();
       if (response.success) {
         commit("GETALL", response.tasks);
+      } else {
+        console.error(response.message);
+      }
+    },
+    async getTask({ commit }, id) {
+      const response = await APITask.getTask(id);
+      if (response.success) {
+        commit("GETONE", response.task);
       } else {
         console.error(response.message);
       }

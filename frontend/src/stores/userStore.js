@@ -14,7 +14,6 @@ const userStore = {
     },
     SETUSER(state, user) {
       state.user = user;
-      state.isLogged = true;
     },
     LOGOUT(state) {
       state.user = {};

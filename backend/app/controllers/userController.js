@@ -9,6 +9,7 @@ class UserController {
       res.status(200).json({
         message: "lay thong tin thanh cong",
         user,
+        success: true,
       });
     } catch (error) {
       res.status(500).json({
