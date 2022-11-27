@@ -45,6 +45,14 @@ const userStore = {
         return response.success;
       }
     },
+    logout({ commit, dispatch }) {
+      localStorage.removeItem("token");
+      commit("LOGOUT");
+      dispatch("activeToast", {
+        success: true,
+        message: "Đăng xuất thành công!",
+      });
+    },
   },
 };
 

@@ -21,24 +21,26 @@ const taskStore = {
         commit("GETALL", response.tasks);
       }
     },
-    async getTask({ commit }, id) {
+    async getTask({ commit, dispatch }, id) {
       const response = await APITask.getTask(id);
       if (response.success) {
         commit("GETONE", response.task);
       }
       dispatch("activeToast", response);
     },
-    async editTask({ dispatch }, data, id) {
-      const response = await APITask.editTask(data, id);
-
+    async editTask({ dispatch }, data) {
+      const response = await APITask.editTask(data.values, data.id);
+      await dispatch("getTasks");
       dispatch("activeToast", response);
     },
     async deleteTask({ dispatch }, id) {
       const response = await APITask.deleteTask(id);
+      await dispatch("getTasks");
       dispatch("activeToast", response);
     },
     async postTask({ dispatch }, data) {
       const response = await APITask.postTask(data);
+      await dispatch("getTasks");
       dispatch("activeToast", response);
     },
   },

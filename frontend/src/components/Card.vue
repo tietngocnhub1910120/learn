@@ -8,16 +8,14 @@
     </div>
     <div class="px-6 pt-4 pb-2">
       <span
-        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-        >#photography</span
+        @click="handleDelete(task?._id)"
+        class="cursor-pointer inline-block bg-rose-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
+        >Xóa</span
       >
       <span
-        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-        >#travel</span
-      >
-      <span
-        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-        >#winter</span
+        @click="handleEdit(task?._id)"
+        class="cursor-pointer inline-block bg-yellow-200 rounded-full px-3 py-1 text-sm font-semibold text-black mr-2 mb-2"
+        >Chỉnh sửa</span
       >
     </div>
     <div class="px-6 pt-4 pb-2">
@@ -33,6 +31,15 @@
 export default {
   props: {
     task: { type: Object },
+  },
+  methods: {
+    async handleEdit(id) {
+      this.$store.dispatch("showModal");
+      await this.$store.dispatch("getTask", id);
+    },
+    async handleDelete(id) {
+      await this.$store.dispatch("deleteTask", id);
+    },
   },
 };
 </script>

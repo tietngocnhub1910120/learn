@@ -205,8 +205,10 @@ export default {
   },
   methods: {
     async handleRegiter(values) {
-      const data = await this.$store.dispatch("register", values);
-      console.log(data);
+      const success = await this.$store.dispatch("register", values);
+      if (success) {
+        this.$router.push("/home");
+      }
     },
   },
   created() {

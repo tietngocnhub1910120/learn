@@ -23,6 +23,7 @@
               >{{ user.username }}</span
             >
             <span
+              @click="handleLogout"
               class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent cursor-pointer duration-300 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
               >Đăng xuất</span
             >
@@ -42,8 +43,8 @@ export default {
   },
   methods: {
     handleLogout() {
-      // Khi click vào đăng xuất
-      // dispatch đến actions đăng xuất
+      this.$store.dispatch("logout");
+      this.$router.push("/");
     },
   },
   async created() {

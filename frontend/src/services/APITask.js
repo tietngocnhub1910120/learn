@@ -27,7 +27,7 @@ class APITask {
   }
   async editTask(data, id) {
     try {
-      const response = await this.http.post(`/${id}`, data, {
+      const response = await this.http.put(`/${id}`, data, {
         headers: authHeader(),
       });
       return response.data;

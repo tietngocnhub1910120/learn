@@ -20,12 +20,10 @@ import Header from "../components/Header.vue";
 import Cards from "../components/Cards.vue";
 import Modal from "../components/Modal.vue";
 export default {
-  data() {},
   components: {
     Header,
     Cards,
     Modal,
-    // Toast,
   },
   methods: {
     handleShowModal() {
