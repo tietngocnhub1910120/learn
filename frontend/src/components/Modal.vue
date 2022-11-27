@@ -14,6 +14,7 @@
             type="button"
             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
             data-modal-toggle="authentication-modal"
+            @click="handleHideModal"
           >
             <svg
               aria-hidden="true"
@@ -130,15 +131,19 @@ export default {
   },
   components: { Field, Form, ErrorMessage },
   props: {
-    isShowModal: { type: Boolean, default: false },
     task: { type: Object },
+  },
+  computed: {
+    isShowModal() {
+      return this.$store.state.modal.isShowModal;
+    },
   },
   methods: {
     handlePostTask() {
       // xử lý đăng bài
     },
     handleHideModal() {
-      this.$props.isShowModal = false;
+      this.$store.dispatch("hideModal");
       resetForm();
     },
   },

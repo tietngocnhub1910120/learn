@@ -25,28 +25,24 @@ const userStore = {
       const response = await APIUser.getUser();
       if (response.success) {
         commit("SETUSER", response.user);
-      } else {
-        console.error(response.message);
       }
     },
-    async register({ commit }, data) {
+    async register({ commit, dispatch }, data) {
       const response = await APIUser.register(data);
+      dispatch("activeToast", response);
       if (response.success) {
         localStorage.setItem("token", response.token);
         commit("REGISTER");
         return response.success;
-      } else {
-        console.error(response.message);
       }
     },
-    async login({ commit }, data) {
+    async login({ commit, dispatch }, data) {
       const response = await APIUser.login(data);
+      dispatch("activeToast", response);
       if (response.success) {
         localStorage.setItem("token", response.token);
         commit("LOGIN");
         return response.success;
-      } else {
-        console.error(response.message);
       }
     },
   },

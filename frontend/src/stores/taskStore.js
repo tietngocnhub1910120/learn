@@ -16,46 +16,30 @@ const taskStore = {
   actions: {
     async getTasks({ commit }) {
       const response = await APITask.getTasks();
+
       if (response.success) {
         commit("GETALL", response.tasks);
-      } else {
-        console.error(response.message);
       }
     },
     async getTask({ commit }, id) {
       const response = await APITask.getTask(id);
       if (response.success) {
         commit("GETONE", response.task);
-      } else {
-        console.error(response.message);
       }
+      dispatch("activeToast", response);
     },
-    async editTask({ commit }, data, id) {
+    async editTask({ dispatch }, data, id) {
       const response = await APITask.editTask(data, id);
-      if (response.success) {
-        // thong bao
-        console.log(response.message);
-      } else {
-        console.error(response.message);
-      }
+
+      dispatch("activeToast", response);
     },
-    async deleteTask({ commit }, id) {
+    async deleteTask({ dispatch }, id) {
       const response = await APITask.deleteTask(id);
-      if (response.success) {
-        // thong bao
-        console.log(response.message);
-      } else {
-        console.error(response.message);
-      }
+      dispatch("activeToast", response);
     },
-    async postTask({ commit }, data) {
+    async postTask({ dispatch }, data) {
       const response = await APITask.postTask(data);
-      if (response.success) {
-        // thong bao
-        console.log(response.message);
-      } else {
-        console.error(response.message);
-      }
+      dispatch("activeToast", response);
     },
   },
 };
