@@ -49,7 +49,7 @@
                 <label
                   for="title"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >title task</label
+                  >Title task</label
                 >
                 <Field
                   :model-value="getTaskById?.title"
@@ -65,7 +65,7 @@
                 <label
                   for="body"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >body task</label
+                  >Body task</label
                 >
                 <Field
                   :model-value="getTaskById?.body"
