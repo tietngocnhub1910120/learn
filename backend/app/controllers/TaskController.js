@@ -6,7 +6,7 @@ class TaskController {
     const userId = req.userId;
     if (title == "" || body == "") {
       return res.status(401).json({
-        message: "Khong duoc bo trong cac truong",
+        message: "Nhập thiếu trường dữ liệu!!!",
         success: false,
       });
     }
@@ -22,13 +22,13 @@ class TaskController {
       await newTask.save();
 
       res.status(200).json({
-        message: "Tao task thanh cong",
+        message: "Tạo task thành công!!!",
         success: true,
       });
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        message: "Server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }
@@ -39,13 +39,13 @@ class TaskController {
     try {
       const tasks = await Task.find({ poster: userId });
       res.status(201).json({
-        message: "Lay tasks thanh cong",
+        message: "Lấy danh sách task thành công!!!",
         tasks,
         success: true,
       });
     } catch (error) {
       res.status(500).json({
-        message: "Server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }
@@ -56,13 +56,13 @@ class TaskController {
     try {
       const task = await Task.findOne({ poster: userId, _id: id });
       res.status(201).json({
-        message: "Lay task thanh cong",
+        message: "Lấy task thành công!!!",
         task,
         success: true,
       });
     } catch (error) {
       res.status(500).json({
-        message: "Server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }
@@ -75,7 +75,7 @@ class TaskController {
 
     if (title == "" || body == "") {
       return res.status(403).json({
-        message: "Khong duoc bo trong cac truong",
+        message: "Nhập thiếu các trường dữ liệu!!!",
         success: false,
       });
     }
@@ -92,13 +92,13 @@ class TaskController {
         { new: true }
       );
       res.status(203).json({
-        message: "update thanh cong",
+        message: "Cập nhật thành công!!!",
         success: true,
         updateTask,
       });
     } catch (error) {
       res.status(500).json({
-        message: "Server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }
@@ -113,12 +113,12 @@ class TaskController {
         poster: userId,
       });
       res.status(203).json({
-        message: "Xoa bai viet thanh cong",
+        message: "Xóa bài viết thành công!!!",
         success: true,
       });
     } catch (error) {
       res.status(500).json({
-        message: "Server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }

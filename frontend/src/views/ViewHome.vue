@@ -27,7 +27,11 @@ export default {
   },
   methods: {
     handleShowModal() {
+      this.resetTask();
       this.$store.dispatch("showModal");
+    },
+    resetTask() {
+      this.$store.state.task.task = {};
     },
   },
   async created() {

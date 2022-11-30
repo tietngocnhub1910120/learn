@@ -14,7 +14,7 @@
       <div
         class="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800"
       >
-        Login To Your Account
+        Đăng nhập
       </div>
       <Form
         class="mt-10"
@@ -53,9 +53,9 @@
                 type="text"
                 name="username"
                 class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-                placeholder="Enter Username"
+                placeholder="Nhập tên người dùng của bạn"
               />
-              <ErrorMessage name="username" class="text-rose-400" />
+              <ErrorMessage name="username" class="text-rose-400 mt-2" />
             </div>
           </div>
           <div class="flex flex-col mb-6">
@@ -90,7 +90,7 @@
                 type="password"
                 name="password"
                 class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-                placeholder="Enter Password"
+                placeholder="Nhập mật khẩu của bạn"
               />
               <ErrorMessage name="password" class="text-rose-400" />
             </div>
@@ -100,7 +100,7 @@
               type="submit"
               class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded py-2 w-full transition duration-150 ease-in"
             >
-              <span class="mr-2 uppercase">Login</span>
+              <span class="mr-2 uppercase">Đăng nhập</span>
               <span>
                 <svg
                   class="h-6 w-6"
@@ -140,7 +140,7 @@
               />
             </svg>
           </span>
-          <span class="ml-2">You don't have an account?</span>
+          <span class="ml-2">Bạn chưa có tài khoản?</span>
         </RouterLink>
       </div>
     </div>

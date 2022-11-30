@@ -7,13 +7,13 @@ class UserController {
     try {
       const user = await User.findOne({ _id: userId }).select("-password");
       res.status(200).json({
-        message: "lay thong tin thanh cong",
+        message: "Lấy thông tin thành công!!!",
         user,
         success: true,
       });
     } catch (error) {
       res.status(500).json({
-        message: "server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }
@@ -23,7 +23,7 @@ class UserController {
     //khong nhap gi
     if (username == "" || password == "") {
       return res.status(401).json({
-        message: "khong duoc bo trong cac truong du lieu",
+        message: "Nhập thiếu trường password hoặc username!!!",
         success: false,
       });
     }
@@ -34,7 +34,7 @@ class UserController {
 
       if (!user) {
         return res.status(402).json({
-          message: "user khong ton tai",
+          message: "Tài khoản không tồn tại!!!",
           success: false,
         });
       }
@@ -42,7 +42,7 @@ class UserController {
       const check = await argon2.verify(user.password, password);
       if (!check) {
         return res.status(403).json({
-          message: "password khong dung",
+          message: "password không đúng!!!",
           success: false,
         });
       }
@@ -50,14 +50,14 @@ class UserController {
       const token = jwt.sign(user._id.toString(), "ufhdfhfhdgghcvh");
 
       res.status(201).json({
-        message: "dang nhap thanh cong",
+        message: "Đăng nhập thành công!!!",
         success: true,
         token,
       });
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        message: "server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }
@@ -68,7 +68,7 @@ class UserController {
     // kiem tra rong
     if (username == "" || password == "" || comfirmPassword == "") {
       return res.status(401).json({
-        message: "bat buoc nhap tat ca truong",
+        message: "Nhập thiếu trường dữ liệu!!!",
         success: false,
       });
     }
@@ -78,14 +78,15 @@ class UserController {
       const user = await User.findOne({ username: username });
       if (user) {
         return res.status(402).json({
-          message: "username nay da co nguoi dung, vui long chon username khac",
+          message:
+            "username này đã có người chọn, vui lòng chọn username khác!!!",
           success: false,
         });
       }
       // pass trung pass
       if (password != comfirmPassword) {
         return res.status(403).json({
-          message: "password khong trung khop, vui long nhap lai",
+          message: "password không khớp",
           success: false,
         });
       }
@@ -101,13 +102,13 @@ class UserController {
       const token = jwt.sign(newUser._id.toString(), "ufhdfhfhdgghcvh");
 
       res.status(201).json({
-        message: "dang ky tai khoan thanh cong",
+        message: "Đăng ký tài khoản thành công!!!",
         success: true,
         token,
       });
     } catch (error) {
       res.status(500).json({
-        message: "server khong phan hoi",
+        message: "Máy chủ không phản hồi!!!",
         success: false,
       });
     }

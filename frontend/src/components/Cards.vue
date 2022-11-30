@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-4 gap-4">
-    <Card v-for="task in getTasks" :task="task"></Card>
+    <Card v-for="task in getTasks" :task="task" :key="task._id"></Card>
   </div>
 </template>
 

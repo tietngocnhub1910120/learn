@@ -38,7 +38,8 @@ export default {
       await this.$store.dispatch("getTask", id);
     },
     async handleDelete(id) {
-      await this.$store.dispatch("deleteTask", id);
+      this.$store.dispatch("showModalDelete");
+      await this.$store.dispatch("getTask", id);
     },
   },
 };
